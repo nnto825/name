@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.box{
+				height: 200px;
+				width: 200px;
+				background-color: silver;
+				text-align: center;
+				position: absolute;
+				top:0;
+				z-index: 1;
+			}
+			a{
+				position: absolute;
+				top:0;
+			}
+		</style>
+		
+		<script src="js/hammer.js"></script>
+		
+	</head>
+	<body>
+		
+		<div class="box" id="box">
+			<span>
+				床前明月光，<br />
+				疑是地上霜，<br />
+				举头望明月，<br />
+				低头思故乡。
+			</span>
+		</div>
+		
+		<a href="http://www.baidu.com">百度一下</a>
+		
+		<script>
+			
+			var box = document.getElementById("box");
+			box.addEventListener("touchstart",function(ev){
+				ev.preventDefault();
+			})
+			box.addEventListener("touchend",function(e){
+//				this.style.display = "none";
+			})
+			
+			var hins = new Hammer(box);
+			hins.get('pinch').set({enable : true});
+			hins.on("panleft",function(){
+				console.log("swipe left")
+			})
+			hins.on("panright",function(){
+				console.log("swipe right")
+			})
+			hins.on("panup",function(){
+				console.log("swipe up")
+			})
+			hins.on("pandown",function(){
+				console.log("swipe down")
+			})
+			
+			var sc = 1;
+			hins.on("panchin",function(){
+				sc -= 0.03;
+				if(sc<0.3){
+					sc=0.3;
+				}
+				d.style.transform = "scale("+sc+")";
+			})
+			hins.on("panchout",function(){
+				sc += 0.03;
+				if(sc>3){
+					sc=3;
+				}
+				d.style.transform = "scale("+sc+")";
+			})
+			
+			
+		</script>
+		
+		
+	</body>
+</html>
